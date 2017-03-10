@@ -63,22 +63,28 @@ This model works fine in the simulator. Given the interest of time and limitatio
 * Dropouts used throughout and L2 Regularization Used
 
 ####4. Appropriate training data
+
 ##### Data Preprocessing
 Image Preprocessing:
 -	Apply Contrast Limited Adaptive Histogram Equalization to Y channel. (Line 35 model.py)
 -	Crop the image to remove the irrelevant information like horizon and car hood (Line 108 model.py)
 -	Normalize the image for faster convergence. (Line 112 model.py)
 Python Image Generators for Faster Running of Model. (Line 51 model.py)
-##### Data Augmentation
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, Left Camera and Right Camera augmented images and recovering from the left and right sides of the road. The Udacity provided was heavily skewed to center driving. So I have also tried to incorporate driving data for recovery from road shoulders by recording videos from simulator.
 
-##### Udacity Provided Dataset with Left Right Augmentation:
+##### Data Augmentation
+* Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, Left Camera and Right Camera augmented images and recovering from the left and right sides of the road. (Line 68 model.py)
+* The Udacity provided was heavily skewed to center driving. So I have also tried to incorporate driving data for recovery from road shoulders by recording videos from simulator.
+
+##### Udacity Provided Dataset with Left Right Camera Image Augmentation:
 ![alt text][image2]
+
+Steering Measurement vs Count of Image
 
 ##### Dataset with new Vehicle Recovery from Shoulders
 ![alt text][image3]
 
-For details about how I created the training data, see the next section.
+Steering Measurement vs Count of Image
+
 ####5. Autonomous Driving Video recording
 I have also included the video.mp4 file.
 
