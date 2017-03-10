@@ -1,12 +1,4 @@
-#**Behavioral Cloning** 
-
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
-**Behavioral Cloning Project**
+#**Behavioral Cloning Project** 
 
 The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior
@@ -18,7 +10,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/P3_Architecture.jpg "CNN Architecture Visualization"
+[image1]: ./examples/P3_Architecture.png "CNN Architecture Visualization"
 [image2]: ./examples/Udacity_Dataset_Visualization.JPG "Udacity Provided Dataset with Left and Right Image Augmentation"
 [image3]: ./examples/Augmented_Dataset_Visualization.JPG "Dataset with new Vehicle Recovery from Shoulders"
 
