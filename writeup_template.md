@@ -37,50 +37,50 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. I have Used the Nvidia Architecture suggested in the Course and Modified it. The CNN Architecture is as follows:
 
-Image Preprocessing  - Apply Contrast Limited Adaptive Histogram Equalization to Y channel  - Crop the image to remove the irrelevant information like horizon and car hood - Normalize the image for faster convergence
-Modified Nvidia CNN Architecture:  Loss Function: Mean Squared Error, Optimizer: Adam, Trainable Params: 981,819
-Layer 1:  Input Shape: 90x320x3, Filter: 5x5, Stride: 2x2, Output: 43x 158x24 , Activation: Relu
-Layer 2:  Input Shape: 43x 158x 24 , Filter: 5x5, Stride: 2x2, Output: 20,x77x36, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
-Layer 3:  Input Shape: 20,x77x36,, Filter: 5x5, Stride: 2x2, Output: 8x37x48, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
-Layer 4:  Input Shape: 8x37x48, Filter: 3x3, Stride: None, Output: 6x35x64, Regularization: L2(0.001), Activation: Relu
-Layer 5:  Input Shape: 6x35x64, Filter: 3x3, Stride: None, Output: 4x33x64, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
-Flatten: Output: 4x33x64 = 8448
-Fully Connected Layer 6:  Input Shape: 8448,  Output: 100, Regularization: L2(0.001), Activation: Relu, Dropout: 0.2
-Fully Connected Layer 7:  Input Shape: 100, Output: 50, Regularization: L2(0.001), Activation: Relu, Dropout: 0.2
-Fully Connected Layer 8:  Input Shape: 50, Output: 10, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
-Layer 9:  LOGIT = 1 Neuron – Steering Measurement Prediction
+##### Modified Nvidia CNN Architecture:  Loss Function: Mean Squared Error, Optimizer: Adam, Trainable Params: 981,819
+* Layer 1:  Input Shape: 90x320x3, Filter: 5x5, Stride: 2x2, Output: 43x 158x24 , Activation: Relu
+* Layer 2:  Input Shape: 43x 158x 24 , Filter: 5x5, Stride: 2x2, Output: 20,x77x36, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
+* Layer 3:  Input Shape: 20,x77x36,, Filter: 5x5, Stride: 2x2, Output: 8x37x48, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
+* Layer 4:  Input Shape: 8x37x48, Filter: 3x3, Stride: None, Output: 6x35x64, Regularization: L2(0.001), Activation: Relu
+* Layer 5:  Input Shape: 6x35x64, Filter: 3x3, Stride: None, Output: 4x33x64, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
+* Flatten: Output: 4x33x64 = 8448
+* Fully Connected Layer 6:  Input Shape: 8448,  Output: 100, Regularization: L2(0.001), Activation: Relu, Dropout: 0.2
+* Fully Connected Layer 7:  Input Shape: 100, Output: 50, Regularization: L2(0.001), Activation: Relu, Dropout: 0.2
+* Fully Connected Layer 8:  Input Shape: 50, Output: 10, Regularization: L2(0.001), Activation: Relu, Dropout: 0.5
+* Layer 9:  LOGIT = 1 Neuron – Steering Measurement Prediction
 ![alt text][image1]
 
 ####2. Attempts to reduce overfitting in the model
 
 The Model has been heavily regularized using Dropout and L2 regularization. Since the total parameters that are trained is 981,819, and dataset I have used is highly skewed to center steering there are higher chances of overfitting. 
-This model works fine in the simulator. Given the interest of time and limitation on the VARIETY of data used, I am sure this can be further improved even with less trainable parameters.
+This model works fine in the simulator. Given the interest of time and limitation on the VARIETY of data used, I am sure this can be further improved even with less trainable parameters. This model is not expected to work well on the track 2 and for the reasons that model is not enough generalized under different driving conditions. This model has cloned my behavior to drive on track one. 
 
 ####3. Model parameter tuning
 
-The model used an Adam optimizer, so the learning rate was not tuned manually (model.py line 164).
-Epoch Used = 10, 
+* The model used an Adam optimizer, so the learning rate was not tuned manually (model.py line 164).
+* Epoch Used = 10
+* Loss Function: MSE
+* Dropouts used throughout and L2 Regularization Used
 
 ####4. Appropriate training data
-
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road. The Udacity provided was heavily skewed to center driving. I have tried to incorporate driving data for recovery from road shoulders by recording videos from simulator.
+##### Data Preprocessing
+Image Preprocessing:
+-	Apply Contrast Limited Adaptive Histogram Equalization to Y channel. (Line 35 model.py)
+-	Crop the image to remove the irrelevant information like horizon and car hood (Line 108 model.py)
+-	Normalize the image for faster convergence. (Line 112 model.py)
+Python Image Generators for Faster Running of Model. (Line 51 model.py)
+##### Data Augmentation
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, Left Camera and Right Camera augmented images and recovering from the left and right sides of the road. The Udacity provided was heavily skewed to center driving. So I have also tried to incorporate driving data for recovery from road shoulders by recording videos from simulator.
 
 ##### Udacity Provided Dataset with Left Right Augmentation:
 ![alt text][image2]
-
 
 ##### Dataset with new Vehicle Recovery from Shoulders
 ![alt text][image3]
 
 For details about how I created the training data, see the next section.
-####5. Data Preprocessing
-Image Preprocessing:
--	Apply Contrast Limited Adaptive Histogram Equalization to Y channel  (Line 35 model.py)
--	Crop the image to remove the irrelevant information like horizon and car hood (Line 108 model.py)
--	Normalize the image for faster convergence. (Line 112 model.py)
-Python Image Generators for Faster Running of Model. (Line 51 model.py)
-####6. Video 
-I have also included the video.mp4 file 
+####5. Autonomous Driving Video recording
+I have also included the video.mp4 file.
 
 ####7. Additional Info:  Training Summary
 Epoch 1/10
